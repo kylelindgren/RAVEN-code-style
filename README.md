@@ -1,5 +1,5 @@
 The style guide and automated checker are based on those developed by Google 
-- see message below.
+-- see message below.
 
 This is automated checker to make sure a C++ file follows Google's C++ style
 guide (https://google.github.io/styleguide/cppguide.html). As it
