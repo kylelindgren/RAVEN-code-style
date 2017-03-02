@@ -2,32 +2,25 @@
 
 This project includes two files for ensuring code compliance with common Raven style conventions: 
 
-* .clang_format
-    configuration file used by clang to clean up whitespace errors
+* .clang_format -- configuration file used by clang to clean up whitespace errors
 
-* cpplint_raven.py
+* cpplint_raven.py -- python script to detect code style errors 
 
-The repo contains an auto formatting script for the [ROS C++ Style Guidelines](http://wiki.ros.org/CppStyleGuide).
-
-> **Note: this style is in beta format, please submit suggestions or fixes!**
-
-## Setup
+## Clang Setup
 
  * Install **clang_format**:
 
    ``sudo apt-get install -y clang-format-3.6``
 
- * Then symlink or copy in the root of your catkin workspace the file ``.clang_format``, located in this repo. You can save this file from [this link](https://raw.githubusercontent.com/davetcoleman/roscpp_code_format/master/.clang-format). For example, place it on your computer here:
+ * Then symlink or copy in the root of your project directory the file ``.clang_format``, located in this repo. For example, place it on your computer here:
 
-   ``~/catkin_ws/.clang_format``
+   ``/opt/raven_2/raven_ros/raven_2/.clang_format``
 
- * If you are interested in improving this configuration file, we recommend you checkout the git repo and symlink, e.g.:
+ * Now any file inside your project directory will be formatted with the Raven whitespace conventions.
 
-   ``ln -s ~/roscpp_code_format/.clang-format ~/catkin_ws/.clang-format``
+> **Note: clang makes changes to your files and while it is highly unlikely these changes will affect code execution behavior, this cannot be guaranteed**
 
- * Now any file inside your catkin workspace will be formatted with the ROS style guidelines described in this config file
-
-## Usage
+## Clang Usage
 
 You can run **clang_format** in several ways:
 
@@ -35,7 +28,7 @@ You can run **clang_format** in several ways:
 
 Format single file:
 
-    clang-format-3.6 -i -style=file MY_ROS_NODE.cpp
+    clang-format-3.6 -i -style=file homing.cpp
 
 Format entire directory recursively including subfolders:
 
