@@ -107,8 +107,8 @@ Enumerators (for both scoped and unscoped enums) should be named either like mac
 
 In general macros should not be used. However, if they are absolutely needed, then they should be named with all capitals and underscores.
 
-#define ROUND(x) ...
-#define PI_ROUNDED 3.0
+    #define ROUND(x) ...
+    #define PI_ROUNDED 3.0
 
 
 
