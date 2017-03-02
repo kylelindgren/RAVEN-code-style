@@ -64,9 +64,51 @@ Data members of classes, both static and non-static, are named like ordinary non
      private:
       string table_name_;  // OK - underscore at end.
       string tablename_;   // OK.
-          static Pool<TableInfo>* pool_;  // OK.
+      static Pool<TableInfo>* pool_;  // OK.
     };
 
+### Struct Data Members
+
+Data members of structs, both static and non-static, are named like ordinary nonmember variables. They do not have the trailing underscores that data members in classes have.
+
+    struct UrlTableProperties {
+      string name;
+      int num_entries;
+      static Pool<UrlTableProperties>* pool;
+    };
+
+### Function Names
+
+Regular functions have mixed case; accessors and mutators may be named like variables.
+
+Ordinarily, functions should start with a capital letter and have a capital letter for each new word (a.k.a. "Camel Case" or "Pascal case"). Such names should not have underscores. Prefer to capitalize acronyms as single words (i.e. StartRpc(), not StartRPC()).
+
+    AddTableEntry()
+    DeleteUrl()
+    OpenFileOrDie()
+
+Accessors and mutators (get and set functions) may be named like variables. These often correspond to actual member variables, but this is not required. For example, int count() and void set_count(int count).
+
+### Namespace Names
+
+Namespace names are all lower-case. Top-level namespace names are based on the project name . Avoid collisions between nested namespaces and well-known top-level namespaces.
+
+### Enumeration Names
+
+Enumerators (for both scoped and unscoped enums) should be named either like macros, such as: ENUM_NAME.
+
+    enum AlternateUrlTableErrors {
+      OK = 0,
+      OUT_OF_MEMORY = 1,
+      MALFORMED_INPUT = 2,
+    };
+
+### Macro Names
+
+In general macros should not be used. However, if they are absolutely needed, then they should be named with all capitals and underscores.
+
+#define ROUND(x) ...
+#define PI_ROUNDED 3.0
 
 
 
