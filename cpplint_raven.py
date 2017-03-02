@@ -542,7 +542,7 @@ _root = None
 
 # The allowed line length of files.
 # This is set by --linelength flag.
-_line_length = 80
+_line_length = 100
 
 # The allowed extensions for file names
 # This is set by --extensions flag.
@@ -1853,12 +1853,13 @@ def CheckForHeaderGuard(filename, clean_lines, error):
   ParseNolintSuppressions(filename, raw_lines[endif_linenum], endif_linenum,
                           error)
   match = Match(r'#endif\s*//\s*' + cppvar + r'(_)?\b', endif)
-  if match:
-    if match.group(1) == '_':
-      # Issue low severity warning for deprecated double trailing underscore
-      error(filename, endif_linenum, 'build/header_guard', 0,
-            '#endif line should be "#endif  // %s"' % cppvar)
-    return
+  # raven commented out
+  # if match:
+  #   if match.group(1) == '_':
+  #     # Issue low severity warning for deprecated double trailing underscore
+  #     error(filename, endif_linenum, 'build/header_guard', 0,
+  #           '#endif line should be "#endif  // %s"' % cppvar)
+  #   return
 
   # Didn't find the corresponding "//" comment.  If this file does not
   # contain any "//" comments at all, it could be that the compiler
@@ -1870,18 +1871,20 @@ def CheckForHeaderGuard(filename, clean_lines, error):
       no_single_line_comments = False
       break
 
-  if no_single_line_comments:
-    match = Match(r'#endif\s*/\*\s*' + cppvar + r'(_)?\s*\*/', endif)
-    if match:
-      if match.group(1) == '_':
-        # Low severity warning for double trailing underscore
-        error(filename, endif_linenum, 'build/header_guard', 0,
-              '#endif line should be "#endif  /* %s */"' % cppvar)
-      return
+      # raven commented out
+  # if no_single_line_comments:
+  #   match = Match(r'#endif\s*/\*\s*' + cppvar + r'(_)?\s*\*/', endif)
+  #   if match:
+  #     if match.group(1) == '_':
+  #       # Low severity warning for double trailing underscore
+  #       error(filename, endif_linenum, 'build/header_guard', 0,
+  #             '#endif line should be "#endif  /* %s */"' % cppvar)
+  #     return
 
   # Didn't find anything
-  error(filename, endif_linenum, 'build/header_guard', 5,
-        '#endif line should be "#endif  // %s"' % cppvar)
+  # raven commented out
+  # error(filename, endif_linenum, 'build/header_guard', 5,
+  #       '#endif line should be "#endif  // %s"' % cppvar)
 
 
 def CheckHeaderFileIncluded(filename, include_state, error):
@@ -2731,14 +2734,15 @@ def CheckForNonStandardConstructs(filename, clean_lines, linenum,
   # For the rest, work with both comments and strings removed.
   line = clean_lines.elided[linenum]
 
-  if Search(r'\b(const|volatile|void|char|short|int|long'
-            r'|float|double|signed|unsigned'
-            r'|schar|u?int8|u?int16|u?int32|u?int64)'
-            r'\s+(register|static|extern|typedef)\b',
-            line):
-    error(filename, linenum, 'build/storage_class', 5,
-          'Storage-class specifier (static, extern, typedef, etc) should be '
-          'at the beginning of the declaration.')
+  # raven commented out
+  # if Search(r'\b(const|volatile|void|char|short|int|long'
+  #           r'|float|double|signed|unsigned'
+  #           r'|schar|u?int8|u?int16|u?int32|u?int64)'
+  #           r'\s+(register|static|extern|typedef)\b',
+  #           line):
+  #   error(filename, linenum, 'build/storage_class', 5,
+  #         'Storage-class specifier (static, extern, typedef, etc) should be '
+  #         'at the beginning of the declaration.')
 
   if Match(r'\s*#\s*endif\s*[^/\s]+', line):
     error(filename, linenum, 'build/endif_comment', 5,
@@ -3043,24 +3047,27 @@ def CheckComment(line, filename, linenum, next_line_start, error):
       # Checks for common mistakes in TODO comments.
       comment = line[commentpos:]
       match = _RE_PATTERN_TODO.match(comment)
-      if match:
-        # One whitespace is correct; zero whitespace is handled elsewhere.
-        leading_whitespace = match.group(1)
-        if len(leading_whitespace) > 1:
-          error(filename, linenum, 'whitespace/todo', 2,
-                'Too many spaces before TODO')
+      # raven commented out
+      # if match:
+      #   # One whitespace is correct; zero whitespace is handled elsewhere.
+      #   leading_whitespace = match.group(1)
+      #   if len(leading_whitespace) > 1:
+      #     error(filename, linenum, 'whitespace/todo', 2,
+      #           'Too many spaces before TODO')
 
-        username = match.group(2)
-        if not username:
-          error(filename, linenum, 'readability/todo', 2,
-                'Missing username in TODO; it should look like '
-                '"// TODO(my_username): Stuff."')
+          # raven commented out
+        # username = match.group(2)
+        # if not username:
+        #   error(filename, linenum, 'readability/todo', 2,
+        #         'Missing username in TODO; it should look like '
+        #         '"// TODO(my_username): Stuff."')
 
-        middle_whitespace = match.group(3)
+        # middle_whitespace = match.group(3)
         # Comparisons made explicit for correctness -- pylint: disable=g-explicit-bool-comparison
-        if middle_whitespace != ' ' and middle_whitespace != '':
-          error(filename, linenum, 'whitespace/todo', 2,
-                'TODO(my_username) should be followed by a space')
+        # raven commented out
+        # if middle_whitespace != ' ' and middle_whitespace != '':
+        #   error(filename, linenum, 'whitespace/todo', 2,
+        #         'TODO(my_username) should be followed by a space')
 
       # If the comment contains an alphanumeric character, there
       # should be a space somewhere between it and the // unless
@@ -4203,10 +4210,11 @@ def CheckAltTokens(filename, clean_lines, linenum, error):
   if line.find('/*') >= 0 or line.find('*/') >= 0:
     return
 
-  for match in _ALT_TOKEN_REPLACEMENT_PATTERN.finditer(line):
-    error(filename, linenum, 'readability/alt_tokens', 2,
-          'Use operator %s instead of %s' % (
-              _ALT_TOKEN_REPLACEMENT[match.group(1)], match.group(1)))
+    #  raven commented out
+  # for match in _ALT_TOKEN_REPLACEMENT_PATTERN.finditer(line):
+  #   error(filename, linenum, 'readability/alt_tokens', 2,
+  #         'Use operator %s instead of %s' % (
+  #             _ALT_TOKEN_REPLACEMENT[match.group(1)], match.group(1)))
 
 
 def GetLineWidth(line):
@@ -4471,10 +4479,11 @@ def CheckIncludeLine(filename, clean_lines, linenum, include_state, error):
   #
   # We also make an exception for Lua headers, which follow google
   # naming convention but not the include convention.
-  match = Match(r'#include\s*"([^/]+\.h)"', line)
-  if match and not _THIRD_PARTY_HEADERS_PATTERN.match(match.group(1)):
-    error(filename, linenum, 'build/include', 4,
-          'Include the directory when naming .h files')
+  # raven commented out
+  # match = Match(r'#include\s*"([^/]+\.h)"', line)
+  # if match and not _THIRD_PARTY_HEADERS_PATTERN.match(match.group(1)):
+  #   error(filename, linenum, 'build/include', 4,
+  #         'Include the directory when naming .h files')
 
   # we shouldn't include a file more than once. actually, there are a
   # handful of instances where doing so is okay, but in general it's
@@ -4508,10 +4517,11 @@ def CheckIncludeLine(filename, clean_lines, linenum, include_state, error):
       # lower type after that.
       error_message = include_state.CheckNextIncludeOrder(
           _ClassifyInclude(fileinfo, include, is_system))
-      if error_message:
-        error(filename, linenum, 'build/include_order', 4,
-              '%s. Should be: %s.h, c system, c++ system, other.' %
-              (error_message, fileinfo.BaseName()))
+      # raven commented out
+      # if error_message:
+      #   error(filename, linenum, 'build/include_order', 4,
+      #         '%s. Should be: %s.h, c system, c++ system, other.' %
+      #         (error_message, fileinfo.BaseName()))
       canonical_include = include_state.CanonicalizeAlphabeticalOrder(include)
       if not include_state.IsInAlphabeticalOrder(
           clean_lines, linenum, canonical_include):
@@ -5510,12 +5520,13 @@ def CheckForIncludeWhatYouUse(filename, clean_lines, include_state, error,
     return
 
   # All the lines have been processed, report the errors found.
-  for required_header_unstripped in required:
-    template = required[required_header_unstripped][1]
-    if required_header_unstripped.strip('<>"') not in include_dict:
-      error(filename, required[required_header_unstripped][0],
-            'build/include_what_you_use', 4,
-            'Add #include ' + required_header_unstripped + ' for ' + template)
+  # raven commented out
+  # for required_header_unstripped in required:
+  #   template = required[required_header_unstripped][1]
+  #   if required_header_unstripped.strip('<>"') not in include_dict:
+  #     error(filename, required[required_header_unstripped][0],
+  #           'build/include_what_you_use', 4,
+  #           'Add #include ' + required_header_unstripped + ' for ' + template)
 
 
 _RE_PATTERN_EXPLICIT_MAKEPAIR = re.compile(r'\bmake_pair\s*<')
