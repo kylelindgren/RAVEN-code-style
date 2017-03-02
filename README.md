@@ -1,3 +1,40 @@
+# roscpp Code Format
+Why waste your valuable development time formatting code manually when we are trying to build amazing robots?
+
+The repo contains an auto formatting script for the [ROS C++ Style Guidelines](http://wiki.ros.org/CppStyleGuide).
+
+> **Note: this style is in beta format, please submit suggestions or fixes!**
+
+## Setup
+
+ * Install **clang_format**:
+
+   ``sudo apt-get install -y clang-format-3.6``
+
+ * Then symlink or copy in the root of your catkin workspace the file ``.clang_format``, located in this repo. You can save this file from [this link](https://raw.githubusercontent.com/davetcoleman/roscpp_code_format/master/.clang-format). For example, place it on your computer here:
+
+   ``~/catkin_ws/.clang_format``
+
+ * If you are interested in improving this configuration file, we recommend you checkout the git repo and symlink, e.g.:
+
+   ``ln -s ~/roscpp_code_format/.clang-format ~/catkin_ws/.clang-format``
+
+ * Now any file inside your catkin workspace will be formatted with the ROS style guidelines described in this config file
+
+## Usage
+
+You can run **clang_format** in several ways:
+
+### Command Line
+
+Format single file:
+
+    clang-format-3.6 -i -style=file MY_ROS_NODE.cpp
+
+Format entire directory recursively including subfolders:
+
+    find . -name '*.h' -or -name '*.hpp' -or -name '*.cpp' | xargs clang-format-3.6 -i -style=file $1
+
 The style guide and automated checker are based on those developed by Google 
 -- see message below.
 
