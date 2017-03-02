@@ -1,10 +1,14 @@
 # Raven Code Style
 
-This project includes two files for ensuring code compliance with common Raven style conventions: 
+Much of the Raven code was developed before determining a style guide and therefore many files are not in line with this repository. Updating the old files may be the subject of future work, but for now we advise all new files follow the conventions detailed here.
+
+This project includes a file for naming conventions and two files for ensuring code compliance with common Raven style conventions: 
 
 * .clang_format -- configuration file used by Clang to clean up whitespace errors
 
 * cpplint_raven.py -- python script to detect code style errors 
+
+Refer to naming.md for guidelines on naming files, functions, variables, etc. 
 
 ## Clang Setup
 
