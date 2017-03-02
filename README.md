@@ -28,11 +28,11 @@ You can run **clang_format** in several ways:
 
 Format single file:
 
-    clang-format-3.6 -i -style=file homing.cpp
+    clang-format-3.6 -i -style=file file.cpp
     
 or to output changed file and compare with a diff tool:
 
-    clang-format-3.6 -style=file homing.cpp > homing_clanged.cpp
+    clang-format-3.6 -style=file file.cpp > file_clanged.cpp
 
 Format entire directory recursively including subfolders:
 
@@ -43,7 +43,7 @@ For more information on Clang, please refer to the [Clang documentation](https:/
 
 ## Cpplint Setup
 
- * Copy in the root of your project directory the file ``cpplint_raven.py``, located in this repo. For example, place it on your computer here:
+Copy in the root of your project directory the file ``cpplint_raven.py``, located in this repo. For example, place it on your computer here:
 
    ``/opt/raven_2/raven_ros/raven_2/cpplint_raven.py``
 
@@ -55,7 +55,7 @@ You can run **clang_format** in several ways:
 
 Run on a single file:
 
-    python cpplint_raven.py homing.cpp 2> homing_linted.txt
+    python cpplint_raven.py file.cpp 2> file_linted.txt
     
 Run on entire directory recursively including subfolders:
 
