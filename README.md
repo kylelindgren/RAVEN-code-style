@@ -1,6 +1,6 @@
 # Raven Code Style
 This project includes two files for ensuring code compliance with common Raven style conventions: 
-*.clang_format
+    *.clang_format
 **configuration file used by clang to clean up whitespace errors
 *cpplint_raven.py
 
