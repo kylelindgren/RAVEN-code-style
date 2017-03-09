@@ -1,6 +1,6 @@
 # Raven Code Style
 
-Much of the Raven code was developed before determining a style guide and therefore many files are not in line with this repository. Updating the old files may be the subject of future work, but for now we advise all new files follow the conventions detailed here.
+Much of the Raven code was developed before determining a style guide and therefore many older files are not congruent with the guidlines specified in this repository. Updating the old files may be the subject of future work, but for now we advise all new files follow the conventions detailed here.
 
 This project includes a file for naming conventions and two files for ensuring code compliance with common Raven style conventions: 
 
