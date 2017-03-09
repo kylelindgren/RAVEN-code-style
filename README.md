@@ -2,7 +2,7 @@
 
 Much of the Raven code was developed before determining a style guide and therefore many older files are not congruent with the guidlines specified in this repository. Updating the old files may be the subject of future work, but for now we advise all new files follow the conventions detailed here.
 
-This project includes a file for naming conventions and two files for ensuring code compliance with common Raven style conventions: 
+This repository includes a file containing naming conventions and two files (.clang\_format, cpplint_raven.py) for ensuring code compliance with common Raven style conventions: 
 
 * .clang_format -- configuration file used by Clang to clean up whitespace errors
 
